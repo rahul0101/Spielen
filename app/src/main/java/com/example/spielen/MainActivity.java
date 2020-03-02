@@ -17,12 +17,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
+    FirebaseFirestore rootRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser!=null)
+        if(currentUser!=null) {
             statusTextView.setText(currentUser.getEmail());
+            //navigate(currentUser);
+        }
     }
 
     @Override
@@ -101,12 +105,36 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             statusTextView.setText(user.getEmail());
+                            navigate(user);
                         } else {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             statusTextView.setText("Error!");
                         }
                     }
                 });
+    }
+
+    public void navigate(FirebaseUser u) {
+        final FirebaseUser user = u;
+        rootRef = FirebaseFirestore.getInstance();
+        rootRef.collection("user_data").document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("Exists", "Document exists!");
+                        startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    } else {
+                        Log.d("Doesn't exist", "Document does not exist!");
+                        Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                        startActivity(intent);
+                    }
+                } else {
+                    Log.d("Excepttt", "Failed with: ", task.getException());
+                }
+            }
+        });
     }
 
     private void signIn() {
