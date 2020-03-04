@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_events"
-        android:name="com.example.spielen.ui.home.HomeFragment"
+        android:name="com.example.spielen.ui.events.EventsFragment"
         android:label="@string/title_events"
         tools:layout="@layout/fragment_events" />
 
     <fragment
         android:id="@+id/navigation_my_events"
-        android:name="com.example.spielen.ui.dashboard.DashboardFragment"
+        android:name="com.example.spielen.ui.my_events.MyEventsFragment"
         android:label="@string/title_my_events"
         tools:layout="@layout/fragment_my_events" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.spielen.ui.notifications.NotificationsFragment"
+        android:name="com.example.spielen.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
