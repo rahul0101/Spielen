@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,8 +27,8 @@ import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
 
-    String gender[] = {"Male", "Female", "Others"};
-    EditText editTextName, editTextPhone;
+    String gender[] = {"Select Gender", "Male", "Female", "Other"};
+    EditText editTextName, editTextPhone, editTextAge;
     Button buttonNext;
     Spinner spinnerGender;
     FirebaseUser user;
@@ -37,11 +40,41 @@ public class SignupActivity extends AppCompatActivity {
 
         editTextName = findViewById(R.id.editTextName);
         editTextPhone = findViewById(R.id.editTextPhone);
+        editTextAge = findViewById(R.id.editTextAge);
         spinnerGender = findViewById(R.id.spinner);
         buttonNext = findViewById(R.id.buttonNext);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, gender);
-        arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner_item, gender)
+        {
+            @Override
+            public boolean isEnabled(int position){
+                if(position == 0)
+                {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerGender.setAdapter(arrayAdapter);
 
         rootRef = FirebaseFirestore.getInstance();
@@ -50,12 +83,13 @@ public class SignupActivity extends AppCompatActivity {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextName.getText() != null && editTextPhone.getText().toString().length()==10 && spinnerGender.getSelectedItem() != null)
+                if(editTextName.getText().toString().length() != 0 && editTextAge.getText().toString().length()!= 0 && editTextPhone.getText().toString().length()==10 && spinnerGender.getSelectedItem() != null && !spinnerGender.getSelectedItem().toString().equals("Select Gender"))
                 {
                     Map<String, Object> userdata = new HashMap<>();
                     userdata.put("name", editTextName.getText().toString());
                     userdata.put("phone", editTextPhone.getText().toString());
                     userdata.put("gender", spinnerGender.getSelectedItem().toString());
+                    userdata.put("age", Integer.valueOf(editTextAge.getText().toString()));
 
                     rootRef.collection("user_data").document(user.getEmail())
                             .set(userdata)
