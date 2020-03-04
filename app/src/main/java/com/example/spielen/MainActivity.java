@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton = findViewById(R.id.signInButton);
         signOutButton = findViewById(R.id.signOutButton);
-        statusTextView = findViewById(R.id.status);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null) {
-            statusTextView.setText(currentUser.getEmail());
             //navigate(currentUser);
         }
     }
@@ -88,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 Log.w(TAG, "Google sign in failed", e);
-                statusTextView.setText("Failed!");
+                Toast.makeText(getApplicationContext(), "Sign in failed! Please try again.", Toast.LENGTH_SHORT).show();
+                //statusTextView.setText("Failed!");
             }
         }
     }
@@ -104,11 +104,13 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            statusTextView.setText(user.getEmail());
+                            Toast.makeText(getApplicationContext(), "Signed in as " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                            //statusTextView.setText(user.getEmail());
                             navigate(user);
                         } else {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            statusTextView.setText("Error!");
+                            Toast.makeText(getApplicationContext(), "Sign in failed! Please try again.", Toast.LENGTH_SHORT).show();
+                            //statusTextView.setText("Error!");
                         }
                     }
                 });
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        statusTextView.setText("Signed Out!");
+//                        statusTextView.setText("Signed Out!");
                     }
                 });
     }
