@@ -79,4 +79,3 @@
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-    android:layout_height="match_parent"/>
