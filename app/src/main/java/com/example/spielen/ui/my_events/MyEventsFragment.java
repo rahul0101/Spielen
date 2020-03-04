@@ -1,4 +1,4 @@
-package com.example.spielen.ui.home;
+package com.example.spielen.ui.my_events;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.spielen.R;
 
-public class HomeFragment extends Fragment {
+public class MyEventsFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private MyEventsViewModel myEventsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_events, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        myEventsViewModel =
+                ViewModelProviders.of(this).get(MyEventsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_my_events, container, false);
+        final TextView textView = root.findViewById(R.id.text_dashboard);
+        myEventsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
