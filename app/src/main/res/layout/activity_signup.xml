@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:fontFamily="@font/ubuntu_light"
         android:hint="Age"
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="120dp"
         android:ems="10"
         android:fontFamily="@font/ubuntu_light"
 
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:fontFamily="@font/ubuntu_light"
         android:hint="Mobile Number"
@@ -75,7 +75,7 @@
         android:layout_width="280dp"
         android:layout_height="55dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/ubuntu_light"
         android:spinnerMode="dropdown"
         android:textSize="30sp"
@@ -89,7 +89,7 @@
         android:layout_width="152dp"
         android:layout_height="49dp"
         android:layout_marginStart="124dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/btn_design"
         android:fontFamily="@font/ubuntu_light"
         android:text="Next"
@@ -100,4 +100,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner"
         app:layout_constraintVertical_bias="0.093" />
+
+    <Button
+        android:id="@+id/buttonUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="44dp"
+        android:text="Upload Image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

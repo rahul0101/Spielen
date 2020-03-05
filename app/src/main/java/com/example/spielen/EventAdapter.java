@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.EventHolder> {
+    public  OnItemClickListener listener;
 
     public EventAdapter(@NonNull FirestoreRecyclerOptions<Event> options) {
         super(options);
@@ -39,6 +41,24 @@ public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.E
             textViewDate = view.findViewById(R.id.textViewDate);
             textViewTime = view.findViewById(R.id.textViewTime);
             textViewName = view.findViewById(R.id.textViewEventName);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION && listener != null) {
+                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }
