@@ -7,6 +7,11 @@
         android:title="@string/title_events" />
 
     <item
+        android:id="@+id/navigation_joined"
+        android:icon="@drawable/my_events"
+        android:title="@string/title_joined" />
+
+    <item
         android:id="@+id/navigation_my_events"
         android:icon="@drawable/my_events"
         android:title="@string/title_my_events" />
