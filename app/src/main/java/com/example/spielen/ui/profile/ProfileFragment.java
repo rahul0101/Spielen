@@ -75,4 +75,23 @@ public class ProfileFragment extends Fragment {
 
         return root;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        rootRef.collection("user_data").document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if(doc.exists()) {
+                        email.setText(user.getEmail());
+                        age.setText(doc.getData().get("age").toString());
+                        phone.setText(doc.getData().get("phone").toString());
+                        name.setText(doc.getData().get("name").toString());
+                    }
+                }
+            }
+        });
+    }
 }
