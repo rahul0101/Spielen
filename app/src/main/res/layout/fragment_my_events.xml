@@ -22,5 +22,6 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="50dp"
         app:srcCompat="@drawable/add_foreground" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.spielen.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
+import com.example.spielen.AddEventActivity;
+import com.example.spielen.EditProfileActivity;
 import com.example.spielen.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -30,6 +34,7 @@ public class ProfileFragment extends Fragment {
     private ProfileViewModel profileViewModel;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     ImageView imageView;
+    FloatingActionButton fab;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://spielen-9b364.appspot.com");
     TextView name,age,email,phone;
@@ -44,6 +49,7 @@ public class ProfileFragment extends Fragment {
         phone = root.findViewById(R.id.textViewPhone);
         name = root.findViewById(R.id.textViewName);
         email = root.findViewById(R.id.textViewEmail);
+        fab = root.findViewById(R.id.floatingActionButton);
 
         rootRef.collection("user_data").document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -60,6 +66,12 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), EditProfileActivity.class));
+            }
+        });
 
         return root;
     }
