@@ -1,8 +1,10 @@
 package com.example.spielen;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,17 @@ public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.E
         holder.textViewDate.setText(model.getDate());
         holder.textViewTime.setText(model.getTime());
         holder.textViewName.setText(model.getName());
+        if(model.getName()!=null) {
+            if (model.getName().toLowerCase().equals("football")) {
+                holder.rl.setBackgroundResource(R.drawable.football);
+            } else if (model.getName().toLowerCase().equals("cricket")) {
+                holder.rl.setBackgroundResource(R.drawable.cricket);
+            } else if (model.getName().toLowerCase().equals("tennis")) {
+                holder.rl.setBackgroundResource(R.drawable.tennis);
+            } else if (model.getName().toLowerCase().equals("table tennis")) {
+                holder.rl.setBackgroundResource(R.drawable.tabletennis);
+            }
+        }
     }
 
     @NonNull
@@ -35,12 +48,14 @@ public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.E
 
     class EventHolder extends RecyclerView.ViewHolder{
         TextView textViewName, textViewTime, textViewDate;
+        RelativeLayout rl;
 
         public EventHolder(View view){
             super(view);
             textViewDate = view.findViewById(R.id.textViewDate);
             textViewTime = view.findViewById(R.id.textViewTime);
             textViewName = view.findViewById(R.id.textViewEventName);
+            rl = view.findViewById(R.id.relativeLayout);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
