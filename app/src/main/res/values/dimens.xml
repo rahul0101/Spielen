@@ -3,4 +3,7 @@
     <dimen name="activity_horizontal_margin">30dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="btn_corner_radius">2dp</dimen>
+    <dimen name="shadowdx">3</dimen>
+    <dimen name="shadowdy">3</dimen>
+
 </resources>
