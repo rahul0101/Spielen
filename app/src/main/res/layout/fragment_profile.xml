@@ -6,77 +6,76 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/ageTextView"
+        android:id="@+id/textViewAge"
         android:layout_width="323dp"
         android:layout_height="48dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="25 yrs"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPhone" />
 
     <TextView
-        android:id="@+id/phoneTextView"
+        android:id="@+id/textViewPhone"
         android:layout_width="323dp"
         android:layout_height="48dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="9741402760"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
     <TextView
-        android:id="@+id/emailTextView"
+        android:id="@+id/textViewEmail"
         android:layout_width="323dp"
         android:layout_height="48dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="sanaro199@gmail.com"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
 
     <TextView
-        android:id="@+id/nameTextView"
+        android:id="@+id/textViewName"
         android:layout_width="323dp"
         android:layout_height="48dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="Sanchit"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile" />
 
     <ImageView
-        android:id="@+id/profileImageView"
+        android:id="@+id/imageViewProfile"
         android:layout_width="145dp"
         android:layout_height="157dp"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars[1]" />
+        tools:srcCompat="@tools:sample/avatars[1]"
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="44dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="100dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ageTextView"
-        app:layout_constraintVertical_bias="0.68"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-    android:layout_height="match_parent"/>

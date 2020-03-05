@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,10 +35,14 @@ public class SignupActivity extends AppCompatActivity {
 
     String gender[] = {"Select Gender", "Male", "Female", "Other"};
     EditText editTextName, editTextPhone, editTextAge;
-    Button buttonNext;
+    Button buttonNext, buttonUpload;
     Spinner spinnerGender;
     FirebaseUser user;
     FirebaseFirestore rootRef;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReferenceFromUrl("gs://spielen-9b364.appspot.com");
+    Uri filePath;
+    final int PICK_IMAGE_REQUEST = 111;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
         editTextAge = findViewById(R.id.editTextAge);
         spinnerGender = findViewById(R.id.spinner);
         buttonNext = findViewById(R.id.buttonNext);
+        buttonUpload = findViewById(R.id.buttonUpload);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner_item, gender)
         {
@@ -96,7 +107,8 @@ public class SignupActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    startActivity(new Intent(SignupActivity.this, HomeActivity.class));
+                                    uploadImage();
+                                    //startActivity(new Intent(SignupActivity.this, HomeActivity.class));
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -113,5 +125,57 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+        buttonUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_PICK);
+                startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
+            }
+        });
+
+    }
+
+    protected void uploadImage()
+    {
+        if(filePath != null) {
+            StorageReference childRef = storageRef.child(user.getEmail()+".jpg");
+
+            //uploading the image
+            UploadTask uploadTask = childRef.putFile(filePath);
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                   // Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    //Toast.makeText(getApplicationContext(), "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
+                }
+            });
+            startActivity(new Intent(SignupActivity.this, HomeActivity.class));
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Select an image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+            try {
+                //getting image from gallery
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                Toast.makeText(getApplicationContext(), "Image selected!", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -53,18 +53,19 @@ public class AddEventActivity extends AppCompatActivity {
                 List<String> players = Arrays.asList();
                 datetime.put(editTextDate.getText().toString(), editTextTime.getText().toString());
                 location.put(editTextLat.getText().toString(), editTextLong.getText().toString());
-                event.put("Name", editTextName.getText().toString());
-                event.put("Host", user.getEmail());
-                event.put("Location", "Manipal");
-                event.put("Time", editTextTime.getText().toString());
-                event.put("Date", editTextDate.getText().toString());
-                event.put("Players", players);
+                event.put("name", editTextName.getText().toString());
+                event.put("host", user.getEmail());
+                event.put("location", "Manipal");
+                event.put("time", editTextTime.getText().toString());
+                event.put("date", editTextDate.getText().toString());
+                event.put("players", players);
 
                 rootRef.collection("events").add(event)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getApplicationContext(), "Event added!", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
