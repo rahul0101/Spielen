@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".JoinActivity"></activity>
+        <activity android:name=".JoinedActivity"></activity>
+        <activity
+            android:name=".JoinActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog.MinWidth" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".AddEventActivity" />
         <activity

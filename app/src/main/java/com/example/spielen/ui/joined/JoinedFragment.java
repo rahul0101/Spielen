@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spielen.AddEventActivity;
 import com.example.spielen.Event;
 import com.example.spielen.EventAdapter;
+import com.example.spielen.JoinedActivity;
 import com.example.spielen.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,7 +44,8 @@ public class JoinedFragment extends Fragment {
                 ViewModelProviders.of(this).get(JoinedViewModel.class);
         View root = inflater.inflate(R.layout.joined_fragment, container, false);
 
-        Query query = eventsRef.whereEqualTo("host", user.getEmail());
+
+        Query query = eventsRef.whereArrayContains("players", user.getEmail());
         FirestoreRecyclerOptions<Event> options = new FirestoreRecyclerOptions.Builder<Event>()
                 .setQuery(query, Event.class)
                 .build();
@@ -59,7 +61,9 @@ public class JoinedFragment extends Fragment {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 String id = documentSnapshot.getId();
-                Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), JoinedActivity.class);
+                intent.putExtra("id",id);
+                startActivity(intent);
             }
         });
 
@@ -77,4 +81,6 @@ public class JoinedFragment extends Fragment {
         super.onStop();
         adapter.stopListening();
     }
+
+    
 }
