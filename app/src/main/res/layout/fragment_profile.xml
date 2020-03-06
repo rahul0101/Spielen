@@ -12,7 +12,6 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_light"
-        android:text="25 yrs"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPhone" />
@@ -24,7 +23,6 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_light"
-        android:text="9741402760"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
@@ -36,7 +34,6 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_light"
-        android:text="sanaro199@gmail.com"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewName" />
@@ -48,7 +45,6 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_light"
-        android:text="Sanchit"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewProfile" />
