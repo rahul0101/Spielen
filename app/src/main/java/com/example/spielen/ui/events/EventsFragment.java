@@ -1,5 +1,6 @@
 package com.example.spielen.ui.events;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spielen.Event;
 import com.example.spielen.EventAdapter;
+import com.example.spielen.JoinActivity;
 import com.example.spielen.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
@@ -59,6 +61,9 @@ public class EventsFragment extends Fragment {
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 String id = documentSnapshot.getId();
                 Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), JoinActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
         return root;
