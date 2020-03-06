@@ -59,6 +59,7 @@ public class AddEventActivity extends AppCompatActivity {
                 event.put("time", editTextTime.getText().toString());
                 event.put("date", editTextDate.getText().toString());
                 event.put("players", players);
+                event.put("size", editTextSize.getText().toString());
 
                 rootRef.collection("events").add(event)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
