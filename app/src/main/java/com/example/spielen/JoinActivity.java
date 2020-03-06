@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -13,8 +14,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class JoinActivity extends AppCompatActivity {
 
@@ -25,6 +30,7 @@ public class JoinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_join);
 
         join = findViewById(R.id.buttonJoin);
@@ -36,12 +42,35 @@ public class JoinActivity extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rootRef.collection("events").document(id)
-                        .update("players", FieldValue.arrayUnion(user.getEmail())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                rootRef.collection("events").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getApplicationContext(), "Joined Event!", Toast.LENGTH_SHORT).show();
-                        finish();
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()) {
+                            DocumentSnapshot doc = task.getResult();
+                            if(doc.exists()) {
+                                ArrayList arrayList = (ArrayList) doc.getData().get("players");
+                                int x = arrayList.size();
+                                if(doc.getData().get("host").toString().equals(user.getEmail())) {
+                                    Toast.makeText(getApplicationContext(), "You are the host", Toast.LENGTH_SHORT).show();
+                                }
+                                else if(arrayList.contains(user.getEmail())) {
+                                    Toast.makeText(getApplicationContext(), "You have already joined this event", Toast.LENGTH_SHORT).show();
+                                }
+                                else if(x+1 == Integer.parseInt(doc.getData().get("size").toString())){
+                                    Toast.makeText(getApplicationContext(), "Event Full!", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    rootRef.collection("events").document(id)
+                                            .update("players", FieldValue.arrayUnion(user.getEmail())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(getApplicationContext(), "Joined Event!", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    });
+                                }
+                            }
+                        }
                     }
                 });
             }
