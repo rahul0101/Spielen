@@ -12,4 +12,5 @@
     <string name="title_events">Events</string>
     <string name="title_profile">Profile</string>
     <string name="title_joined">Joined</string>
+    <string name="access_token">pk.eyJ1Ijoic2FuYXJvIiwiYSI6ImNrN2Z5NmkxbTA3eHAzZXBoNG5uZTczYWoifQ.-YLR1aTq33gOPoOICIErgw</string>
 </resources>
