@@ -48,8 +48,16 @@ public class JoinActivity extends AppCompatActivity {
                         if(task.isSuccessful()) {
                             DocumentSnapshot doc = task.getResult();
                             if(doc.exists()) {
+                                ArrayList arrayList = (ArrayList) doc.getData().get("players");
+                                int x = arrayList.size();
                                 if(doc.getData().get("host").toString().equals(user.getEmail())) {
                                     Toast.makeText(getApplicationContext(), "You are the host", Toast.LENGTH_SHORT).show();
+                                }
+                                else if(arrayList.contains(user.getEmail())) {
+                                    Toast.makeText(getApplicationContext(), "You have already joined this event", Toast.LENGTH_SHORT).show();
+                                }
+                                else if(x+1 == Integer.parseInt(doc.getData().get("size").toString())){
+                                    Toast.makeText(getApplicationContext(), "Event Full!", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
                                     rootRef.collection("events").document(id)
