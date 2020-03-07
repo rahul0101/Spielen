@@ -1,12 +1,15 @@
 package com.example.spielen;
 
-public class Event {
-    private String name,time,date;
 
-    public Event(String name, String time, String date) {
+import com.google.firebase.Timestamp;
+
+public class Event {
+    private String name;
+    private Timestamp time;
+
+    public Event(String name, Timestamp time) {
         this.name = name;
         this.time = time;
-        this.date = date;
     }
 
     public Event(){}
@@ -19,19 +22,12 @@ public class Event {
         this.name = name;
     }
 
-    public String getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 }
