@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.EventHolder> {
     public  OnItemClickListener listener;
@@ -23,8 +27,11 @@ public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.E
 
     @Override
     protected void onBindViewHolder(@NonNull EventHolder holder, int position, @NonNull Event model) {
-        holder.textViewDate.setText(model.getDate());
-        holder.textViewTime.setText(model.getTime());
+        Date date = model.getTime().toDate();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy");
+        holder.textViewDate.setText(dateFormat.format(date));
+        holder.textViewTime.setText(timeFormat.format(date));
         holder.textViewName.setText(model.getName());
         if(model.getName()!=null) {
             if (model.getName().toLowerCase().equals("football")) {
