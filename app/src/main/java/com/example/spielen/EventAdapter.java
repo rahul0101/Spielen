@@ -42,6 +42,18 @@ public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.E
                 holder.rl.setBackgroundResource(R.drawable.tennis);
             } else if (model.getName().toLowerCase().equals("table tennis")) {
                 holder.rl.setBackgroundResource(R.drawable.tabletennis);
+            } else if (model.getName().toLowerCase().equals("basketball")) {
+                holder.rl.setBackgroundResource(R.drawable.basketball);
+            } else if (model.getName().toLowerCase().equals("volleyball")) {
+                holder.rl.setBackgroundResource(R.drawable.volleyball);
+            } else if (model.getName().toLowerCase().equals("baseball")) {
+                holder.rl.setBackgroundResource(R.drawable.baseball);
+            } else if (model.getName().toLowerCase().equals("chess")) {
+                holder.rl.setBackgroundResource(R.drawable.chess);
+            } else if (model.getName().toLowerCase().equals("badminton")) {
+                holder.rl.setBackgroundResource(R.drawable.badminton);
+            } else if (model.getName().toLowerCase().equals("hockey")) {
+                holder.rl.setBackgroundResource(R.drawable.hockey);
             }
         }
     }
