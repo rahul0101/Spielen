@@ -51,20 +51,21 @@
 
         <TextView
             android:id="@+id/textViewEventName"
-            android:layout_width="201dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="147dp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
-            android:layout_marginEnd="29dp"
+            android:layout_marginEnd="28dp"
             android:fontFamily="@font/ubuntu_light"
             android:shadowColor="#000000"
             android:shadowDx="@dimen/shadowdx"
             android:shadowDy="@dimen/shadowdy"
             android:shadowRadius="1.0"
             android:text="Football"
+            android:textAlignment="center"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="30sp" />
     </RelativeLayout>
