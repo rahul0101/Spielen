@@ -7,13 +7,32 @@
     tools:context=".JoinedActivity">
 
     <Button
+        android:id="@+id/buttonLeave"
+        android:layout_width="111dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/btn_design"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="Leave"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMaps"
+        app:layout_constraintVertical_bias="0.184" />
+
+    <Button
         android:id="@+id/buttonMaps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="294dp"
+        android:layout_width="165dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="252dp"
+        android:background="@drawable/btn_design"
         android:enabled="false"
+        android:fontFamily="@font/ubuntu_light"
         android:text="Directions"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
