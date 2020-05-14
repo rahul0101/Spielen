@@ -2,9 +2,17 @@ package com.example.spielen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -22,7 +30,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class JoinActivity extends AppCompatActivity {
@@ -32,6 +42,9 @@ public class JoinActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
     String id;
+    Date date;
+    String CHANNEL_ID= "SpielenAlarmChID" ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +73,7 @@ public class JoinActivity extends AppCompatActivity {
                 DocumentSnapshot doc = task.getResult();
                 if(doc.exists()) {
                     Timestamp ts = (Timestamp) doc.getData().get("time");
-                    Date date = ts.toDate();
+                    date = ts.toDate();
                     ArrayList arrayList = (ArrayList) doc.getData().get("players");
                     int x = arrayList.size() + 1;
                     rootRef.collection("user_data").document(doc.getData().get("host").toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -108,6 +121,9 @@ public class JoinActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             Toast.makeText(getApplicationContext(), "Joined Event!", Toast.LENGTH_SHORT).show();
+
+                                            setAlarm();
+
                                             finish();
                                         }
                                     });
@@ -132,5 +148,55 @@ public class JoinActivity extends AppCompatActivity {
                 });
             }
         });
+
+    }
+    private void setAlarm() {
+        Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
+        final PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(),
+                intent, 0);
+
+        Date currentTime = Calendar.getInstance().getTime();
+
+        long delay = date.getTime() - currentTime.getTime() - 7200000;
+
+        createNotificationChannel();
+
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                final int notificationID = (int)System.currentTimeMillis();
+                NotificationCompat.Builder n = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_launcher_background)
+                        .setContentTitle("Spielen Remind")
+                        .setContentText("Nottttiiii")
+                        .setContentIntent(pIntent)
+                        .setAutoCancel(true)
+                        .addAction(android.R.drawable.ic_btn_speak_now, "Open App", pIntent);
+
+                NotificationManagerCompat notification = NotificationManagerCompat.from(getApplicationContext());
+                notification.notify(notificationID, n.build());
+            }
+        }, delay);
+        Toast.makeText(getApplicationContext(), String.valueOf(delay) , Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }
