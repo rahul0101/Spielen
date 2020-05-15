@@ -40,6 +40,11 @@ public class JoinedActivity extends AppCompatActivity {
         buttonMessage = findViewById(R.id.btnMessage);
         buttonWhatsapp = findViewById(R.id.btnWhatsapp);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
+        }
+
 
         rootRef.collection("events").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
