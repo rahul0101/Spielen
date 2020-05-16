@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:shape="oval">
+        <item android:state_pressed="true" android:color="@color/red">
+
+            <solid android:backgroundTint="@android:color/holo_orange_dark"
+            android:tint="#000C0101"
+            app:backgroundTint="#F70F0303"
+            app:borderWidth="2dp"
+            />
+        </item>
+
+        <item>
+            <solid android:backgroundTint="@android:color/holo_orange_light"
+                android:tint="#000C0101"
+                app:backgroundTint="#F70F0303"
+                app:borderWidth="2dp"
+                />
+        </item>
+    </selector>
