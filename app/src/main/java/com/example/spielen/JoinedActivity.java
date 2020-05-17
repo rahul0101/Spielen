@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -19,7 +20,8 @@ import com.google.firebase.firestore.GeoPoint;
 
 public class JoinedActivity extends AppCompatActivity {
 
-    Button buttonMaps,buttonWhatsapp, buttonMessage, buttonCall;
+    Button buttonMaps;
+    FloatingActionButton buttonWhatsapp, buttonMessage, buttonCall;
     String id;
     Double lat,lon;
     String phone="";
