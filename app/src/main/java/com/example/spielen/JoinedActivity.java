@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -15,12 +16,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 
 public class JoinedActivity extends AppCompatActivity {
 
-    Button buttonMaps;
+    Button buttonMaps, buttonLeave;
     FloatingActionButton buttonWhatsapp, buttonMessage, buttonCall;
     String id;
     Double lat,lon;
@@ -38,6 +40,7 @@ public class JoinedActivity extends AppCompatActivity {
         lat=0.0; lon=0.0;
 
         buttonMaps = findViewById(R.id.buttonMaps);
+        buttonLeave = findViewById(R.id.buttonLeave);
         buttonCall = findViewById(R.id.btnCall);
         buttonMessage = findViewById(R.id.btnMessage);
         buttonWhatsapp = findViewById(R.id.btnWhatsapp);
@@ -86,7 +89,20 @@ public class JoinedActivity extends AppCompatActivity {
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
+            }
+        });
 
+        buttonLeave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rootRef.collection("events").document(id)
+                        .update("players", FieldValue.arrayRemove(user.getEmail())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(getApplicationContext(), "Left Event!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
             }
         });
 

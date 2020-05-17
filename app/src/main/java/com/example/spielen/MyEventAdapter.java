@@ -1,5 +1,6 @@
 package com.example.spielen;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +17,18 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
-public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.EventHolder> {
+public class MyEventAdapter extends FirestoreRecyclerAdapter<Event, MyEventAdapter.MyEventHolder> {
     public  OnItemClickListener listener;
-    Timestamp timeNow = new Timestamp(Calendar.getInstance().getTime());
 
-    public EventAdapter(@NonNull FirestoreRecyclerOptions<Event> options) {
+    public MyEventAdapter(@NonNull FirestoreRecyclerOptions<Event> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull EventHolder holder, int position, @NonNull Event model) {
+    protected void onBindViewHolder(@NonNull MyEventHolder holder, int position, @NonNull Event model) {
         Date date = model.getTime().toDate();
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy");
@@ -60,25 +59,27 @@ public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.E
             }
         }
 
-        if(timeNow.compareTo(model.getTime())>0)
-        {
-            holder.rl.setVisibility(View.GONE);
-        }
+        Timestamp timeNow = new Timestamp(Calendar.getInstance().getTime());
 
+        if(model.getTime().compareTo(timeNow)<0)
+        {
+            holder.rl.setBackgroundColor(Color.GRAY);
+            holder.textViewName.setText(model.getName() + " -Expired");
+        }
     }
 
     @NonNull
     @Override
-    public EventHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyEventHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_card, parent, false);
-        return new EventHolder(v);
+        return new MyEventHolder(v);
     }
 
-    class EventHolder extends RecyclerView.ViewHolder{
+    class MyEventHolder extends RecyclerView.ViewHolder{
         TextView textViewName, textViewTime, textViewDate;
         RelativeLayout rl;
 
-        public EventHolder(View view){
+        public MyEventHolder(View view){
             super(view);
             textViewDate = view.findViewById(R.id.textViewDate);
             textViewTime = view.findViewById(R.id.textViewTime);
