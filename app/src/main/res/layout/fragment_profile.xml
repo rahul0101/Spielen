@@ -70,6 +70,10 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="40dp"
         android:clickable="true"
+        android:backgroundTint="#F16C83"
+        android:tint="#000C0101"
+        app:backgroundTint="#F70F0303"
+        app:borderWidth="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_edit" />

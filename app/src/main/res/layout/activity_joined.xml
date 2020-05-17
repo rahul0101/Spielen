@@ -6,6 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".JoinedActivity">
 
+    <TextView
+        android:id="@+id/textViewHeading"
+        android:layout_width="268dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="Event Actions"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonMaps"
+        android:layout_width="165dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/btn_design"
+        android:enabled="false"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="Directions"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/buttonLeave"
         android:layout_width="111dp"
@@ -19,53 +48,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonMaps"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/buttonMaps"
-        android:layout_width="165dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="252dp"
-        android:background="@drawable/btn_design"
-        android:enabled="false"
-        android:fontFamily="@font/ubuntu_light"
-        android:text="Directions"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnWhatsapp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
-        android:layout_marginEnd="57dp"
-        android:enabled="false"
-        android:text="Whatsapp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="9dp"
-        android:enabled="false"
-        android:text="Message"
-        app:layout_constraintEnd_toStartOf="@+id/btnWhatsapp"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="76dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:clickable="true"
+        android:tint="#000C0101"
+        app:backgroundTint="#F70F0303"
+        app:borderWidth="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnWhatsapp"
+        app:srcCompat="@drawable/icon_sms" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="20dp"
-        android:enabled="false"
-        android:text="Call"
+        android:layout_marginBottom="76dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:clickable="true"
+        android:rotation="-90"
+        android:tint="#000C0101"
+        app:backgroundTint="#F70F0303"
+        app:borderWidth="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnWhatsapp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/icon_call" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnWhatsapp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="76dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:clickable="true"
+        android:tint="#000C0101"
+        app:backgroundTint="#F70F0303"
+        app:borderWidth="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnMessage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnCall"
+        app:srcCompat="@drawable/icon_whatsapp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

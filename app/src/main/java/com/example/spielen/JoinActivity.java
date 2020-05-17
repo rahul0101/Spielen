@@ -37,13 +37,13 @@ import java.util.Date;
 
 public class JoinActivity extends AppCompatActivity {
 
-    Button join,leave;
-    TextView tv2,tv3,tv4,tv5,tv6;
+    Button join, leave;
+    TextView tv2, tv3, tv4, tv5, tv6, tv7;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
     String id;
     Date date;
-    String CHANNEL_ID= "SpielenAlarmChID" ;
+    String CHANNEL_ID= "SpielenRemindChID" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +59,9 @@ public class JoinActivity extends AppCompatActivity {
         tv4 = findViewById(R.id.textView4);
         tv5 = findViewById(R.id.textView5);
         tv6 = findViewById(R.id.textView6);
+        tv7 = findViewById(R.id.textView7);
 
-        final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        final SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
         final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy");
 
 
@@ -86,8 +87,9 @@ public class JoinActivity extends AppCompatActivity {
                         }
                     });
                     tv3.setText(doc.getData().get("name").toString());
-                    tv4.setText(dateFormat.format(date) + "  " + timeFormat.format(date));
-                    tv5.setText("Players: "+x+ " / "+ doc.getData().get("size"));
+                    tv4.setText(dateFormat.format(date)) ;
+                    tv7.setText(timeFormat.format(date));
+                    tv5.setText(x+ " / "+ doc.getData().get("size"));
 
                 }
             }
@@ -150,6 +152,7 @@ public class JoinActivity extends AppCompatActivity {
         });
 
     }
+
     private void setAlarm() {
         Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
         final PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(),
@@ -168,12 +171,18 @@ public class JoinActivity extends AppCompatActivity {
             public void run(){
                 final int notificationID = (int)System.currentTimeMillis();
                 NotificationCompat.Builder n = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                        .setSmallIcon(R.drawable.ic_launcher_background)
                         .setContentTitle("Spielen Remind")
-                        .setContentText("Nottttiiii")
+                        .setContentText("Event in 2 hours")
                         .setContentIntent(pIntent)
                         .setAutoCancel(true)
                         .addAction(android.R.drawable.ic_btn_speak_now, "Open App", pIntent);
+
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    n.setSmallIcon(R.drawable.spielen_logo_transparent);
+                    n.setColor(getResources().getColor(android.R.color.darker_gray));
+                } else {
+                    n.setSmallIcon(R.drawable.spielen_logo);
+                }
 
                 NotificationManagerCompat notification = NotificationManagerCompat.from(getApplicationContext());
                 notification.notify(notificationID, n.build());
