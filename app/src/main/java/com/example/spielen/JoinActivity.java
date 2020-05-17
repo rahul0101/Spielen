@@ -171,8 +171,8 @@ public class JoinActivity extends AppCompatActivity {
             public void run(){
                 final int notificationID = (int)System.currentTimeMillis();
                 NotificationCompat.Builder n = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                        .setContentTitle("Spielen Remind")
-                        .setContentText("Event in 2 hours")
+                        .setContentTitle("Event Reminder")
+                        .setContentText("You have an event in 2 hours!")
                         .setContentIntent(pIntent)
                         .setAutoCancel(true)
                         .addAction(android.R.drawable.ic_btn_speak_now, "Open App", pIntent);
