@@ -20,6 +20,7 @@ import com.example.spielen.AddEventActivity;
 import com.example.spielen.Event;
 import com.example.spielen.EventAdapter;
 import com.example.spielen.JoinedActivity;
+import com.example.spielen.MyEventAdapter;
 import com.example.spielen.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,7 +36,7 @@ public class JoinedFragment extends Fragment {
     private JoinedViewModel myEventsViewModel;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference eventsRef = db.collection("events");
-    private EventAdapter adapter;
+    private MyEventAdapter adapter;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,14 +51,14 @@ public class JoinedFragment extends Fragment {
                 .setQuery(query, Event.class)
                 .build();
 
-        adapter = new EventAdapter(options);
+        adapter = new MyEventAdapter(options);
 
         RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new MyEventAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 String id = documentSnapshot.getId();
