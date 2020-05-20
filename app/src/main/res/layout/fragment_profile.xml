@@ -5,6 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/signOutButton"
+        android:layout_width="137dp"
+        android:layout_height="49dp"
+        android:background="@drawable/btn_design"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="Sign Out"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAge" />
+
     <TextView
         android:id="@+id/textViewAge"
         android:layout_width="323dp"
@@ -53,11 +67,9 @@
         android:id="@+id/imageViewProfile"
         android:layout_width="145dp"
         android:layout_height="157dp"
-        android:layout_marginStart="108dp"
         android:layout_marginTop="10dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars[1]"
@@ -69,8 +81,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="40dp"
-        android:clickable="true"
         android:backgroundTint="#F16C83"
+        android:clickable="true"
         android:tint="#000C0101"
         app:backgroundTint="#F70F0303"
         app:borderWidth="2dp"

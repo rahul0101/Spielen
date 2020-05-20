@@ -10,34 +10,24 @@
         android:id="@+id/signInButton"
         android:layout_width="152dp"
         android:layout_height="49dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginBottom="284dp"
         android:background="@drawable/btn_design"
         android:fontFamily="@font/ubuntu_light"
         android:text="Sign In"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/signOutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="116dp"
-        android:text="Sign Out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
 
     <TextView
-        android:id="@+id/textViewAddEvent"
-        android:layout_width="140dp"
-        android:layout_height="58dp"
+        android:id="@+id/textViewSpielen"
+        android:layout_width="172dp"
+        android:layout_height="57dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/ubuntu_light"
-        android:text="Sign In"
+        android:text="Spielen"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
         android:textColor="@color/common_google_signin_btn_text_light"
         android:textSize="42sp"
@@ -45,4 +35,14 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="175dp"
+        android:layout_height="176dp"
+        app:layout_constraintBottom_toTopOf="@+id/signInButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSpielen"
+        app:srcCompat="@drawable/spielen_logo_transparent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
