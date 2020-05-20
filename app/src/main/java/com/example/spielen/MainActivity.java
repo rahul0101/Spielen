@@ -28,7 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button signInButton, signOutButton;
+    Button signInButton;
     TextView statusTextView;
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         signInButton = findViewById(R.id.signInButton);
-        signOutButton = findViewById(R.id.signOutButton);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -59,12 +58,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
     }
 
     @Override
@@ -72,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null) {
-            //navigate(currentUser);
+            navigate(currentUser);
         }
     }
 
@@ -144,15 +137,4 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void signOut() {
-        mAuth.signOut();
-
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-//                        statusTextView.setText("Signed Out!");
-                    }
-                });
-    }
 }
