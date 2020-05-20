@@ -1,6 +1,7 @@
 package com.example.spielen.ui.profile;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class ProfileFragment extends Fragment {
     FloatingActionButton fab;
     private FirebaseAuth mAuth;
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReferenceFromUrl("gs://spielen-9b364.appspot.com");
+    StorageReference storageRef = storage.getReference();
     TextView name,age,email,phone;
     Button signOutButton;
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
@@ -58,6 +59,7 @@ public class ProfileFragment extends Fragment {
         email = root.findViewById(R.id.textViewEmail);
         fab = root.findViewById(R.id.floatingActionButton);
         signOutButton = root.findViewById(R.id.signOutButton);
+        imageView = root.findViewById(R.id.imageViewProfile);
 
         rootRef.collection("user_data").document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -69,10 +71,22 @@ public class ProfileFragment extends Fragment {
                         age.setText(doc.getData().get("age").toString());
                         phone.setText(doc.getData().get("phone").toString());
                         name.setText(doc.getData().get("name").toString());
+                        //Glide.with(ProfileFragment.this).load("gs://spielen-9b364.appspot.com/"+user.getEmail()+".jpg").into(imageView);
                     }
                 }
             }
         });
+
+        StorageReference ref = storageRef.child(user.getEmail()+".jpg");
+        Task<Uri> url = ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                Uri url = task.getResult();
+                Toast.makeText(getContext(), url.toString(), Toast.LENGTH_LONG).show();
+                Glide.with(ProfileFragment.this).load(url).into(imageView);
+            }
+        });
+
 
         mAuth = FirebaseAuth.getInstance();
 
