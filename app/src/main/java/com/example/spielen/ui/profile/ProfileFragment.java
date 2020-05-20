@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +19,11 @@ import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.Glide;
 import com.example.spielen.AddEventActivity;
 import com.example.spielen.EditProfileActivity;
+import com.example.spielen.MainActivity;
 import com.example.spielen.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,9 +40,11 @@ public class ProfileFragment extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     ImageView imageView;
     FloatingActionButton fab;
+    private FirebaseAuth mAuth;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://spielen-9b364.appspot.com");
     TextView name,age,email,phone;
+    Button signOutButton;
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,6 +57,7 @@ public class ProfileFragment extends Fragment {
         name = root.findViewById(R.id.textViewName);
         email = root.findViewById(R.id.textViewEmail);
         fab = root.findViewById(R.id.floatingActionButton);
+        signOutButton = root.findViewById(R.id.signOutButton);
 
         rootRef.collection("user_data").document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -66,6 +74,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        mAuth = FirebaseAuth.getInstance();
+
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +92,15 @@ public class ProfileFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null) {
+            //navigate(currentUser);
+        }
     }
 
     @Override
@@ -93,5 +120,18 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void signOut() {
+        mAuth.signOut();
+        GoogleSignIn.getClient(
+                getContext(),
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+        ).signOut();
+
+        Toast.makeText(getActivity(), "Signed out!", Toast.LENGTH_SHORT).show();
+
+        startActivity(new Intent(getContext(), MainActivity.class));
+
     }
 }
