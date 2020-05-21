@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spielen.AddEventActivity;
 import com.example.spielen.Event;
 import com.example.spielen.EventAdapter;
+import com.example.spielen.HostedActivity;
+import com.example.spielen.JoinActivity;
 import com.example.spielen.MyEventAdapter;
 import com.example.spielen.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -63,7 +65,9 @@ public class MyEventsFragment extends Fragment {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 String id = documentSnapshot.getId();
-                Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), HostedActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
 

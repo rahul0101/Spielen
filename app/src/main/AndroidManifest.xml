@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AlarmActivity"></activity>
+        <activity android:name=".HostedActivity"></activity>
+        <activity android:name=".AlarmActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".JoinedActivity" />
         <activity android:name=".JoinActivity" />
