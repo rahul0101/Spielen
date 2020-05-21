@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton = findViewById(R.id.signInButton);
 
+        signInButton.setVisibility(View.GONE);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -66,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null) {
             navigate(currentUser);
+        }
+        else
+        {
+            signInButton.setVisibility(View.VISIBLE);
         }
     }
 
