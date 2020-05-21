@@ -38,8 +38,8 @@ import java.util.Date;
 
 public class HostedActivity extends AppCompatActivity {
 
-    Button join, leave;
-    TextView tv2, tv3, tv4, tv5, tv6, tv7;
+    Button deleteEvent;
+    TextView tv3, tv4, tv5, tv6, tv7;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
     String id;
@@ -52,10 +52,7 @@ public class HostedActivity extends AppCompatActivity {
         //supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_hosted);
 
-        join = findViewById(R.id.buttonJoin);
-        leave = findViewById(R.id.buttonLeave);
-        leave.setVisibility(View.GONE);
-        tv2 = findViewById(R.id.textView2);
+        deleteEvent = findViewById(R.id.buttonDelete);
         tv3 = findViewById(R.id.textView3);
         tv4 = findViewById(R.id.textView4);
         tv5 = findViewById(R.id.textView5);
@@ -78,15 +75,6 @@ public class HostedActivity extends AppCompatActivity {
                     date = ts.toDate();
                     ArrayList arrayList = (ArrayList) doc.getData().get("players");
                     int x = arrayList.size() + 1;
-                    rootRef.collection("user_data").document(doc.getData().get("host").toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            DocumentSnapshot sd = task.getResult();
-                            if(sd.exists()) {
-                                tv2.setText(sd.getData().get("name").toString());
-                            }
-                        }
-                    });
                     tv3.setText(doc.getData().get("name").toString());
                     tv4.setText(dateFormat.format(date)) ;
                     tv7.setText(timeFormat.format(date));
@@ -96,90 +84,17 @@ public class HostedActivity extends AppCompatActivity {
             }
         });
 
-
-
-        join.setOnClickListener(new View.OnClickListener() {
+        deleteEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rootRef.collection("events").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(), "Event successfully deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Event deleted!", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
             }
         });
-
-        leave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rootRef.collection("events").document(id)
-                        .update("players", FieldValue.arrayRemove(user.getEmail())).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getApplicationContext(), "Left Event!", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
-            }
-        });
-
-    }
-
-    private void setAlarm() {
-        Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
-        final PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(),
-                intent, 0);
-
-        Date currentTime = Calendar.getInstance().getTime();
-
-        long delay = date.getTime() - currentTime.getTime() - 7200000;
-
-        createNotificationChannel();
-
-        Handler handler = new Handler();
-
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                final int notificationID = (int)System.currentTimeMillis();
-                NotificationCompat.Builder n = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                        .setContentTitle("Event Reminder")
-                        .setContentText("You have an event in 2 hours!")
-                        .setContentIntent(pIntent)
-                        .setAutoCancel(true)
-                        .addAction(android.R.drawable.ic_btn_speak_now, "Open App", pIntent);
-
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    n.setSmallIcon(R.drawable.spielen_logo_transparent);
-                    n.setColor(getResources().getColor(android.R.color.darker_gray));
-                } else {
-                    n.setSmallIcon(R.drawable.spielen_logo);
-                }
-
-                NotificationManagerCompat notification = NotificationManagerCompat.from(getApplicationContext());
-                notification.notify(notificationID, n.build());
-            }
-        }, delay);
-        Toast.makeText(getApplicationContext(), String.valueOf(delay) , Toast.LENGTH_SHORT).show();
-
-
-    }
-
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
     }
 }

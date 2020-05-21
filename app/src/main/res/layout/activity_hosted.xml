@@ -10,6 +10,7 @@
         android:id="@+id/textViewTimeLabel"
         android:layout_width="101dp"
         android:layout_height="33dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="Time :"
         android:textSize="21sp"
@@ -37,10 +38,11 @@
         android:id="@+id/textViewPreferencesLabel"
         android:layout_width="132dp"
         android:layout_height="34dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="Preferences :"
         android:textSize="21sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonJoin"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +50,9 @@
 
     <TextView
         android:id="@+id/textViewDateLabel"
-        android:layout_width="93dp"
-        android:layout_height="38dp"
+        android:layout_width="102dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="Date :"
         android:textSize="21sp"
@@ -63,6 +66,7 @@
         android:id="@+id/textViewEventLabel"
         android:layout_width="78dp"
         android:layout_height="35dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="Sport :"
         android:textSize="21sp"
@@ -70,7 +74,7 @@
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHostNameLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewHeading" />
 
     <TextView
         android:id="@+id/textViewHeading"
@@ -88,37 +92,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewHostNameLabel"
-        android:layout_width="112dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="5dp"
-        android:fontFamily="@font/ubuntu_light"
-        android:text="Hosted by :"
-        android:textSize="21sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewEventLabel"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHeading" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="250dp"
-        android:layout_height="35dp"
-        android:fontFamily="@font/ubuntu_light"
-        android:textAlignment="center"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewHostNameLabel"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHeading" />
-
-    <TextView
         android:id="@+id/textView3"
-        android:layout_width="286dp"
-        android:layout_height="35dp"
+        android:layout_width="280dp"
+        android:layout_height="38dp"
         android:fontFamily="@font/ubuntu_light"
         android:textAlignment="center"
         android:textSize="21sp"
@@ -127,7 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textViewEventLabel"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewHeading" />
 
     <TextView
         android:id="@+id/textView4"
@@ -161,6 +137,7 @@
         android:id="@+id/textViewPlayersLabel"
         android:layout_width="99dp"
         android:layout_height="40dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="Players :"
         android:textSize="21sp"
@@ -171,7 +148,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTimeLabel" />
 
     <Button
-        android:id="@+id/buttonJoin"
+        android:id="@+id/buttonDelete"
         android:layout_width="182dp"
         android:layout_height="57dp"
         android:background="@drawable/btn_design"
@@ -194,7 +171,7 @@
         android:textAlignment="center"
         android:textSize="21sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/buttonJoin"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textViewPreferencesLabel"
