@@ -17,7 +17,7 @@
         android:textColor="@color/common_google_signin_btn_text_light"
         android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,16 +25,15 @@
         android:id="@+id/editTextName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
 
-        android:layout_marginTop="80dp"
         android:ems="10"
         android:fontFamily="@font/ubuntu_light"
         android:hint="Name"
         android:inputType="textPersonName"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextAge"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateProfileTextView" />
 
@@ -42,15 +41,14 @@
         android:id="@+id/editTextPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="56dp"
         android:ems="10"
         android:fontFamily="@font/ubuntu_light"
         android:hint="Mobile Number"
         android:inputType="phone"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonUpdate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextAge" />
 
@@ -58,15 +56,14 @@
         android:id="@+id/editTextAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="56dp"
         android:ems="10"
         android:fontFamily="@font/ubuntu_light"
         android:hint="Age"
         android:inputType="number"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPhone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
@@ -74,15 +71,14 @@
         android:id="@+id/buttonUpdate"
         android:layout_width="152dp"
         android:layout_height="49dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginBottom="100dp"
         android:background="@drawable/btn_design"
         android:fontFamily="@font/ubuntu_light"
         android:text="Update"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
