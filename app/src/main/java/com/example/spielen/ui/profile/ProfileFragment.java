@@ -82,7 +82,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 Uri url = task.getResult();
-                Toast.makeText(getContext(), url.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), url.toString(), Toast.LENGTH_LONG).show();
                 Glide.with(ProfileFragment.this).load(url).into(imageView);
             }
         });

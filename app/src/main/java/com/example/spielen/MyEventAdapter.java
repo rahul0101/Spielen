@@ -64,7 +64,30 @@ public class MyEventAdapter extends FirestoreRecyclerAdapter<Event, MyEventAdapt
         if(model.getTime().compareTo(timeNow)<0)
         {
             holder.rl.setBackgroundColor(Color.GRAY);
-            holder.textViewName.setText(model.getName() + " -Expired");
+            if(model.getName()!=null) {
+                if (model.getName().toLowerCase().equals("football")) {
+                    holder.rl.setBackgroundResource(R.drawable.football_gray);
+                } else if (model.getName().toLowerCase().equals("cricket")) {
+                    holder.rl.setBackgroundResource(R.drawable.cricket_gray);
+                } else if (model.getName().toLowerCase().equals("tennis")) {
+                    holder.rl.setBackgroundResource(R.drawable.tennis_gray);
+                } else if (model.getName().toLowerCase().equals("table tennis")) {
+                    holder.rl.setBackgroundResource(R.drawable.tabletennis_gray);
+                } else if (model.getName().toLowerCase().equals("basketball")) {
+                    holder.rl.setBackgroundResource(R.drawable.basketball_gray);
+                } else if (model.getName().toLowerCase().equals("volleyball")) {
+                    holder.rl.setBackgroundResource(R.drawable.volleyball_gray);
+                } else if (model.getName().toLowerCase().equals("baseball")) {
+                    holder.rl.setBackgroundResource(R.drawable.baseball_gray);
+                } else if (model.getName().toLowerCase().equals("chess")) {
+                    holder.rl.setBackgroundResource(R.drawable.chess_gray);
+                } else if (model.getName().toLowerCase().equals("badminton")) {
+                    holder.rl.setBackgroundResource(R.drawable.badminton_gray);
+                } else if (model.getName().toLowerCase().equals("hockey")) {
+                    holder.rl.setBackgroundResource(R.drawable.hockey_gray);
+                }
+            }
+            holder.textViewName.setText(model.getName() + " (Expired)");
         }
     }
 
