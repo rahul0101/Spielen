@@ -44,7 +44,7 @@ import static com.squareup.okhttp.internal.http.HttpDate.format;
 public class AddEventActivity extends AppCompatActivity {
 
     EditText editTextName, editTextSize, editTextTime, editTextDate;
-    //EditText editTextNote;
+    EditText editTextNote;
     Button addButton, mapOpenButton;
     FirebaseUser user;
     FirebaseFirestore rootRef;
@@ -61,7 +61,7 @@ public class AddEventActivity extends AppCompatActivity {
         editTextSize = findViewById(R.id.editTextSize);
         editTextTime = findViewById(R.id.editTextTime);
         addButton = findViewById(R.id.buttonAdd);
-        //editTextNote = findViewById(R.id.editTextNote);
+        editTextNote = findViewById(R.id.editTextNote);
 
         mapOpenButton = findViewById(R.id.buttonMapOpen);
         rootRef = FirebaseFirestore.getInstance();
@@ -88,8 +88,7 @@ public class AddEventActivity extends AppCompatActivity {
                 event.put("players", players);
                 event.put("size", editTextSize.getText().toString());
                 event.put("time", timestamp);
-                //event.put("note", editTextNote.getText().toString());
-                // Let the hint say "Note(Optional)"
+                event.put("note", editTextNote.getText().toString());
 
 
                 rootRef.collection("events").add(event)
