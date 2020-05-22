@@ -12,7 +12,7 @@
         android:layout_height="52dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/ubuntu_light"
-        android:text="Event Actions"
+        android:text="Event"
         android:textAlignment="center"
         android:textSize="36sp"
         android:textStyle="bold"
