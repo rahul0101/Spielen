@@ -79,7 +79,12 @@ public class HostedActivity extends AppCompatActivity {
                     tv4.setText(dateFormat.format(date)) ;
                     tv7.setText(timeFormat.format(date));
                     tv5.setText(x+ " / "+ doc.getData().get("size"));
-
+                    if(doc.getData().get("note") == null || doc.getData().get("note").toString().isEmpty()) {
+                        tv6.setText("None");
+                    }
+                    else {
+                        tv6.setText(doc.getData().get("note").toString());
+                    }
                 }
             }
         });
