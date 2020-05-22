@@ -10,7 +10,6 @@
         android:id="@+id/editTextLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:ems="10"
         android:fontFamily="@font/ubuntu_light"
         android:hint="Location name"
@@ -26,12 +25,13 @@
         android:id="@+id/textViewSpielen"
         android:layout_width="244dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/ubuntu_light"
         android:text="Add Event"
         android:textAlignment="center"
         android:textSize="42sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,6 @@
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
         android:ems="10"
         android:fontFamily="@font/ubuntu_light"
         android:hint="Sport"
@@ -47,7 +46,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSpielen" />
 
@@ -55,7 +54,6 @@
         android:id="@+id/editTextSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:ems="10"
         android:fontFamily="@font/ubuntu_light"
         android:hint="Group Size"
@@ -71,7 +69,6 @@
         android:id="@+id/editTextTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:editable="false"
         android:ems="10"
         android:enabled="true"
@@ -81,17 +78,35 @@
         android:hint="Time"
         android:inputType="time"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
 
     <EditText
+        android:id="@+id/editTextNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:ems="10"
+        android:enabled="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:fontFamily="@font/ubuntu_light"
+        android:hint="Extra Info (optional)"
+        android:inputType="time"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+
+    <EditText
         android:id="@+id/editTextDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
@@ -101,7 +116,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonMapOpen" />
 
@@ -109,8 +124,6 @@
         android:id="@+id/buttonAdd"
         android:layout_width="104dp"
         android:layout_height="47dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="64dp"
         android:background="@drawable/btn_design"
         android:enabled="false"
         android:fontFamily="@font/ubuntu_light"
@@ -120,18 +133,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNote" />
 
     <Button
         android:id="@+id/buttonMapOpen"
         android:layout_width="151dp"
         android:layout_height="41dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/btn_design"
         android:fontFamily="@font/ubuntu_light"
         android:text="Select Location"
         app:layout_constraintBottom_toTopOf="@+id/editTextDate"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLocation" />
 
