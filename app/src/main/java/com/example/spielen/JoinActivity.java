@@ -44,7 +44,6 @@ public class JoinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_join);
 
         join = findViewById(R.id.buttonDelete);
@@ -86,7 +85,12 @@ public class JoinActivity extends AppCompatActivity {
                     tv4.setText(dateFormat.format(date)) ;
                     tv7.setText(timeFormat.format(date));
                     tv5.setText(x+ " / "+ doc.getData().get("size"));
-
+                    if(doc.getData().get("note") == null || doc.getData().get("note").toString().isEmpty()) {
+                        tv6.setText("None");
+                    }
+                    else {
+                        tv6.setText(doc.getData().get("note").toString());
+                    }
                 }
             }
         });
