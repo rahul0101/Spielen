@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ public class JoinedActivity extends AppCompatActivity {
 
     Button buttonMaps, buttonLeave;
     FloatingActionButton buttonWhatsapp, buttonMessage, buttonCall;
+    TextView title;
     String id;
     Double lat,lon;
     String phone="";
@@ -44,6 +46,7 @@ public class JoinedActivity extends AppCompatActivity {
         buttonCall = findViewById(R.id.btnCall);
         buttonMessage = findViewById(R.id.btnMessage);
         buttonWhatsapp = findViewById(R.id.btnWhatsapp);
+        title = findViewById(R.id.textViewHeading);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -57,6 +60,7 @@ public class JoinedActivity extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     DocumentSnapshot doc = task.getResult();
                     if(doc.exists()) {
+                        title.setText(doc.getData().get("name").toString());
                         rootRef.collection("user_data").document(doc.getData().get("host").toString()).get().addOnCompleteListener(
                                 new OnCompleteListener<DocumentSnapshot>() {
                                     @Override

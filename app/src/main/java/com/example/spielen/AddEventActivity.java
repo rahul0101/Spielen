@@ -44,6 +44,7 @@ import static com.squareup.okhttp.internal.http.HttpDate.format;
 public class AddEventActivity extends AppCompatActivity {
 
     EditText editTextName, editTextSize, editTextTime, editTextDate;
+    //EditText editTextNote;
     Button addButton, mapOpenButton;
     FirebaseUser user;
     FirebaseFirestore rootRef;
@@ -60,10 +61,13 @@ public class AddEventActivity extends AppCompatActivity {
         editTextSize = findViewById(R.id.editTextSize);
         editTextTime = findViewById(R.id.editTextTime);
         addButton = findViewById(R.id.buttonAdd);
+        //editTextNote = findViewById(R.id.editTextNote);
 
         mapOpenButton = findViewById(R.id.buttonMapOpen);
         rootRef = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +79,6 @@ public class AddEventActivity extends AppCompatActivity {
                 List<String> players = Arrays.asList();
                 GeoPoint geoPoint = new GeoPoint(lat, lon);
                 datetime.put(editTextDate.getText().toString(), editTextTime.getText().toString());
-                //location.put(editTextLat.getText().toString(), editTextLong.getText().toString());
                 event.put("name", editTextName.getText().toString());
                 event.put("host", user.getEmail());
                 event.put("location", geoPoint);
@@ -85,6 +88,8 @@ public class AddEventActivity extends AppCompatActivity {
                 event.put("players", players);
                 event.put("size", editTextSize.getText().toString());
                 event.put("time", timestamp);
+                //event.put("note", editTextNote.getText().toString());
+                // Let the hint say "Note(Optional)"
 
 
                 rootRef.collection("events").add(event)
@@ -170,7 +175,6 @@ public class AddEventActivity extends AppCompatActivity {
                         newDate.set(selectedYear, selectedMonth, selectedDay);
                         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy");
                         String dateString = dateFormat.format(newDate.getTime());
-                        //editTextDate.setText(DateFormat.getDateInstance(DateFormat.SHORT).format(dt));
                         editTextDate.setText(dateString);
                     }
                 }, mcurrentDate.get(Calendar.YEAR), mcurrentDate.get(Calendar.MONTH), mcurrentDate.get(Calendar.DAY_OF_MONTH));
@@ -189,7 +193,6 @@ public class AddEventActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 lon = data.getDoubleExtra("lon", 74.79347404);
                 lat = data.getDoubleExtra("lat", 13.35406421);
-                //Toast.makeText(getApplicationContext(), lon.toString() + " " + lat.toString(), Toast.LENGTH_LONG).show();
                 addButton.setEnabled(true);
             }
         }
