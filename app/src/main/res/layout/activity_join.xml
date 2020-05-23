@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
-        android:id="@+id/textViewPreferencesLabel"
+        android:id="@+id/textViewNotesLabel"
         android:layout_width="129dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
@@ -169,7 +169,7 @@
         android:fontFamily="@font/ubuntu_light"
         android:text="Players :"
         android:textSize="21sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewPreferencesLabel"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNotesLabel"
         app:layout_constraintEnd_toStartOf="@+id/textView5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -214,6 +214,6 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewPreferencesLabel"
+        app:layout_constraintStart_toEndOf="@+id/textViewNotesLabel"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
