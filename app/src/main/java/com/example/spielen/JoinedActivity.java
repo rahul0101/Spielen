@@ -21,11 +21,13 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 
+import java.util.ArrayList;
+
 public class JoinedActivity extends AppCompatActivity {
 
     Button buttonMaps, buttonLeave;
     FloatingActionButton buttonWhatsapp, buttonMessage, buttonCall;
-    TextView title;
+    TextView title,textViewNotes,textViewPlayers,textViewHost;
     String id;
     Double lat,lon;
     String phone="";
@@ -47,6 +49,9 @@ public class JoinedActivity extends AppCompatActivity {
         buttonMessage = findViewById(R.id.btnMessage);
         buttonWhatsapp = findViewById(R.id.btnWhatsapp);
         title = findViewById(R.id.textViewHeading);
+        textViewHost = findViewById(R.id.textViewHost);
+        textViewNotes = findViewById(R.id.textViewNotes);
+        textViewPlayers = findViewById(R.id.textViewPlayers);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -61,6 +66,12 @@ public class JoinedActivity extends AppCompatActivity {
                     DocumentSnapshot doc = task.getResult();
                     if(doc.exists()) {
                         title.setText(doc.getData().get("name").toString());
+                        if(doc.getData().get("note") != null) {
+                            textViewNotes.setText(doc.getData().get("note").toString());
+                        }
+                        ArrayList arrayList = (ArrayList) doc.getData().get("players");
+                        int x = arrayList.size() + 1;
+                        textViewPlayers.setText(x+ " / "+ doc.getData().get("size"));
                         rootRef.collection("user_data").document(doc.getData().get("host").toString()).get().addOnCompleteListener(
                                 new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
@@ -69,6 +80,7 @@ public class JoinedActivity extends AppCompatActivity {
                                             DocumentSnapshot ds = task.getResult();
                                             if(ds.exists()) {
                                                 phone = ds.getData().get("phone").toString();
+                                                textViewHost.setText("Contact "+ds.getData().get("name").toString());
                                                 buttonCall.setEnabled(true);
                                                 buttonMessage.setEnabled(true);
                                                 buttonWhatsapp.setEnabled(true);

@@ -15,7 +15,7 @@
         android:fontFamily="@font/ubuntu_light"
         android:text="Contact "
         android:textAlignment="center"
-        android:textSize="21sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
         app:layout_constraintEnd_toEndOf="parent"

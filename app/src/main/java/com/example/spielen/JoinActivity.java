@@ -188,9 +188,6 @@ public class JoinActivity extends AppCompatActivity {
                 notification.notify(notificationID, n.build());
             }
         }, delay);
-        Toast.makeText(getApplicationContext(), String.valueOf(delay) , Toast.LENGTH_SHORT).show();
-
-
     }
 
     private void createNotificationChannel() {
