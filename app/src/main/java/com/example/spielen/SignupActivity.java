@@ -40,7 +40,7 @@ public class SignupActivity extends AppCompatActivity {
     FirebaseUser user;
     FirebaseFirestore rootRef;
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReferenceFromUrl("gs://spielen-9b364.appspot.com");
+    StorageReference storageRef = storage.getReferenceFromUrl("gs://spielen-d8519.appspot.com");
     Uri filePath;
     final int PICK_IMAGE_REQUEST = 111;
     @Override
